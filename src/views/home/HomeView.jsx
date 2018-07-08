@@ -4,23 +4,17 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './HomeView.css'
 
-import HeroBannerContainer from 'modules/home/containers/HeroBannerContainer'
+import { homeReducers } from 'modules/home/reducers'
+import { HeroBannerContainer } from 'modules/home/containers'
 
-const mapStateToProps = state => ({
-  test: state.test
-})
+const { heroBanner } = homeReducers
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-
-}, dispatch)
+const mapStateToProps = null
+const mapDispatchToProps = null
 
 class Home extends Component {
-  static async getInitialProps({ req, res, match, history, location, ...ctx }) {
-    ctx.store.dispatch({
-      type: 'tape'
-    })
-
-    return { whatever: 'stuff' }
+  static async getInitialProps({ store }) {
+    store.dispatch(heroBanner.actions.loadBanners())
   }
 
   render() {

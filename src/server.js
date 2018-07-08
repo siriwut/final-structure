@@ -40,7 +40,7 @@ server
 
     try {
       const sagaTask = await runSaga()
-      console.log(sagaTask)
+
       const html = await render({
         req,
         res,
