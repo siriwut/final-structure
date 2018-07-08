@@ -12,11 +12,12 @@ const initialStates = fromJS({
 
 export default function reducer(state = initialStates, action) {
   switch(action.type) {
-    case actions.LOAD_BANNERS:
+    case types.LOAD_BANNERS:
       return state
-    case actions.LOAD_BANNERS_SUCCESS:
+    case types.LOAD_BANNERS_SUCCESS:
       return state
-    case actions.LOAD_BANNERS_FAIL:
+        .set('banners', fromJS(action.payload.banners || []))
+    case types.LOAD_BANNERS_FAIL:
       return state
     default:
       return state
@@ -28,8 +29,11 @@ export const actions = {
   loadBanners: () => ({
     type: types.LOAD_BANNERS,
   }),
-  loadBannersSuccess: () => ({
+  loadBannersSuccess: (banners = []) => ({
     type: types.LOAD_BANNERS_SUCCESS,
+    payload: {
+      banners
+    }
   }),
   loadBannersFail: () => ({
     type: types.LOAD_BANNERS_FAIL,

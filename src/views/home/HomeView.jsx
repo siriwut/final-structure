@@ -1,13 +1,13 @@
+import { END } from 'redux-saga'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import './HomeView.css'
 
-import { homeReducers } from 'modules/home/reducers'
+import { heroBanner } from 'modules/home/reducers'
 import { HeroBannerContainer } from 'modules/home/containers'
 
-const { heroBanner } = homeReducers
 
 const mapStateToProps = null
 const mapDispatchToProps = null

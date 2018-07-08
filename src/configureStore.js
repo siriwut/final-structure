@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable'
-import { takeEvery } from 'redux-saga/effects'
+import { takeEvery, put } from 'redux-saga/effects'
 import { createStore as createReduxStore, applyMiddleware, compose } from 'redux'
 import createSagaMiddleware, { END } from 'redux-saga'
 import { connectRouter, routerMiddleware } from 'connected-react-router/immutable'
@@ -13,10 +13,6 @@ import rootReducer from './reducer'
 import rootSaga from './saga'
 
 export const initialState = fromJS({})
-
-// function* rootSaga() {
-//   console.log('helllo Saga')
-// }
 
 const configureStore = (state = initialState, reducer, { middleware = [], reduxDevTools } = {}) => {
   const history = process.env.BROWSER

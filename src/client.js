@@ -11,7 +11,6 @@ import configureStore from './configureStore'
 import './client.css'
 import routes from './routes'
 
-
 const { store, history, runSaga, closeSaga } = configureStore(fromJS(window.__PRELOADED_STATE__))
 
 
@@ -19,28 +18,29 @@ async function render() {
   let sagaTask = await runSaga()
   const data = await ensureReady(routes)
 
-  return hydrate(
+  const component = hydrate(
     <StoreProvider key={uniqueId()} store={store}>
       <ConnectedRouter history={ history }>
-      <BrowserRouter>
         <After data={data} routes={routes} />
-      </BrowserRouter>
       </ConnectedRouter>
     </StoreProvider>,
     document.getElementById('root')
   )
 
   if (module.hot) {
-    module.hot.accept('./sags', () => {
-      const getNewSagas = require('./saga');
+    module.hot.accept('./saga', async () => {
+      const nextSaga = require('./saga')
+
       sagaTask.cancel()
-      sagaTask.done.then(() => {
-        sagaTask = runSaga(function* replacedSaga (action) {
-          yield getNewSagas()
-        })
+
+      await sagaTask.done
+      sagaTask = runSaga(function* replacedSaga (action) {
+        yield nextSaga()
       })
     })
   }
+
+  return component
 }
 
 render()
