@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { Button } from 'antd'
 
 import { heroBanner } from '../reducers'
 
@@ -20,7 +21,7 @@ export class HeroBannerContainer extends Component {
     return (
       <div className="hero">
         slideex
-        <button onClick={loadBanners}>LOAD MORE</button>
+        <Button type="primary" onClick={loadBanners}>LOAD MORE</Button>
       </div>
     )
   }
