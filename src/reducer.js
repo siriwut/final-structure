@@ -1,4 +1,8 @@
+import { fromJS } from 'immutable'
+import { combineReducers } from 'redux-immutable'
 
-export default function reducer() {
-  return {}
-}
+import homeReducer from 'modules/home/reducers'
+
+export default combineReducers({
+  home: homeReducer
+})

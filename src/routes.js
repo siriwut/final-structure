@@ -7,7 +7,7 @@ export default [
     path: '/',
     exact: true,
     component: asyncComponent({
-      loader: () => import('views/home/Home'), // required
+      loader: () => import('views/home/HomeView'), // required
       Placeholder: () => <div>...LOADING...</div>, // this is optional, just returns null by default
     }),
   }

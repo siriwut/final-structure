@@ -1,8 +1,8 @@
 import { call } from 'redux-saga/effects'
 import createSaga from 'createSaga'
 
-import homeSaga from 'modules/home/sagas'
+import heroBannerSaga from './heroBannerSaga'
 
 export default createSaga([
-  call(homeSaga)
+  call(heroBannerSaga)
 ])

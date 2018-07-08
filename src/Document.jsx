@@ -1,14 +1,16 @@
 import React from 'react'
 import { AfterRoot, AfterData } from '@jaredpalmer/after'
+import serialize from 'serialize-javascript'
 
 class Document extends React.Component {
-  static async getInitialProps({ assets, data, renderPage }) {
+  static async getInitialProps({ assets, data, renderPage, ...rest }) {
     const page = await renderPage()
+
     return { assets, data, ...page }
   }
 
   render() {
-    const { helmet, assets, data } = this.props
+    const { helmet, assets, data, serverState } = this.props
     // get attributes from React Helmet
     const htmlAttrs = helmet.htmlAttributes.toComponent()
     const bodyAttrs = helmet.bodyAttributes.toComponent()
@@ -30,6 +32,11 @@ class Document extends React.Component {
         <body {...bodyAttrs}>
           <AfterRoot />
           <AfterData data={data} />
+          <span
+            dangerouslySetInnerHTML={
+              { __html: `<script>window.__PRELOADED_STATE__ = ${serialize(serverState)}</script>` } // prettier-ignore
+            }
+          />
           <script
             type="text/javascript"
             src={assets.client.js}
