@@ -18,9 +18,14 @@ class Home extends Component {
   }
 
   render() {
+    /**
+      concern เรื่อง layout ย่่อย
+    **/
     return (
       <div className="Home">
-        <HeroBannerContainer />
+          <ProductListLayout
+            sidebar={ <HeroBannerContainer /> }
+            content={ <TestContainer /> }/>
       </div>
     )
   }

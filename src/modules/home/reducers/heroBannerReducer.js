@@ -1,3 +1,6 @@
+/**
+  concern ว่า ถ้า reducer เยอะ ทั้งไฟล์จะยาวมาก
+**/
 import { fromJS } from 'immutable'
 
 export const types = {
@@ -40,6 +43,7 @@ export const actions = {
   })
 }
 
+//เรื่องการ toJS() ใน selectors
 export const selectors = {
   getBanners: state => state.getIn([ 'home', 'heroBanner', 'banners' ]).toJS()
 }
